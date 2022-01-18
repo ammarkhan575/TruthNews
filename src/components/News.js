@@ -277,33 +277,13 @@ export class News extends Component {
             <div className="container my-3">
                 <h2>TruthNews | Top Headlines</h2>
                 <div className="row">
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes" imageUrl="https://www.reuters.com/resizer/Bhuzz6I2HhyMUK6Zp6-ga-wpRSU=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/AMEH5LXK6NKG3CHSCMJDHD6UMQ.jpg"/>
+                {this.state.aricles.map((element)=>{
+
+                    return <div key={element.url} className="col-md-4 my-2">
+                        <NewsItem title={element.title} description={element.description} imageUrl={element.urlToImage} newsUrl={element.url}/>
                     </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
-                    <div className="col-md-4 my-2">
-                        <NewsItem title="myTitle" description="mydes"/>
-                    </div>
+                    
+                })}
                 </div>
             </div>
         )
