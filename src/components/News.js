@@ -31,18 +31,18 @@ export class News extends Component {
   }
 
   async updateNews() {
-    this.props.setProgress(10)
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ae906ebf258e46bca389ae678a3c2dfe&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    this.props.setProgress(10);
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
-    this.props.setProgress(50)
+    this.props.setProgress(50);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     });
-    this.props.setProgress(100)
+    this.props.setProgress(100);
   }
 
   async componentDidMount() {
@@ -66,7 +66,7 @@ export class News extends Component {
     this.setState({
       page: this.state.page + 1,
     });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ae906ebf258e46bca389ae678a3c2dfe&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -80,17 +80,17 @@ export class News extends Component {
   render() {
     return (
       <>
-        <h1 className="text-center" style={{marign:"35px 0"}}>
+        <h1 className="text-center" style={{ marign: "35px 0" }}>
           TruthNews | Top {this.capitilise(this.props.category)} Headlines
         </h1>
-        {this.state.loading &&<Spinner/>}
+        {this.state.loading && <Spinner />}
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length !== this.state.totalResults}
           loader={<Spinner />}
         >
-        <div className="container">
+          <div className="container">
             <div className="row">
               {this.state.articles.map((element) => {
                 return (
@@ -100,12 +100,12 @@ export class News extends Component {
                       description={
                         element.description ? element.description : ""
                       }
-                      imageUrl={element.urlToImage ? element.urlToImage : "https://www.images.unsplash.com/photo-1636390785299-b4df455163dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bm8lMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}
-                      newsUrl={
-                        element.url
-                          ? element.url
-                          : ""
+                      imageUrl={
+                        element.urlToImage
+                          ? element.urlToImage
+                          : "https://www.images.unsplash.com/photo-1636390785299-b4df455163dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bm8lMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
                       }
+                      newsUrl={element.url ? element.url : ""}
                       author={element.author ? element.author : "Unknown"}
                       date={element.publishedAt}
                       source={element.source.name}
@@ -114,8 +114,7 @@ export class News extends Component {
                 );
               })}
             </div>
-          
-        </div>
+          </div>
         </InfiniteScroll>
       </>
     );
