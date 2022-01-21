@@ -31,15 +31,18 @@ export class News extends Component {
   }
 
   async updateNews() {
+    this.props.setProgress(10)
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ae906ebf258e46bca389ae678a3c2dfe&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
+    this.props.setProgress(50)
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
     });
+    this.props.setProgress(100)
   }
 
   async componentDidMount() {
@@ -97,11 +100,11 @@ export class News extends Component {
                       description={
                         element.description ? element.description : ""
                       }
-                      imageUrl={element.urlToImage ? element.urlToImage : ""}
+                      imageUrl={element.urlToImage ? element.urlToImage : "https://www.images.unsplash.com/photo-1636390785299-b4df455163dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bm8lMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"}
                       newsUrl={
                         element.url
                           ? element.url
-                          : "https://www.images.unsplash.com/photo-1636390785299-b4df455163dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bm8lMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                          : ""
                       }
                       author={element.author ? element.author : "Unknown"}
                       date={element.publishedAt}
