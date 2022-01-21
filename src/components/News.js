@@ -12,7 +12,6 @@ const News = (props)=> {
   const capitilise = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  // document.title = `ReactNews--${capitilise(props.category)} `;
 
 
   const updateNews = async ()=> {
@@ -30,6 +29,7 @@ const News = (props)=> {
 
   useEffect(() => {
     updateNews();
+      document.title = `ReactNews--${capitilise(props.category)} `;
   }, []);
 
 
@@ -43,8 +43,8 @@ const News = (props)=> {
   };
 
   const fetchMoreData = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
     setPage(page + 1);
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true);
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -55,7 +55,7 @@ const News = (props)=> {
 
     return (
       <>
-        <h1 className="text-center" style={{ marign: "35px 0" }}>
+        <h1 className="text-center" style={{ marign: "35px 0", marginTop: "70px" }}>
           TruthNews | Top {capitilise(props.category)} Headlines
         </h1>
         {loading && <Spinner />}
