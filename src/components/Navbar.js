@@ -6,7 +6,7 @@ return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/general">
-              ReactNews
+              TruthNews
             </Link>
             <button
               className="navbar-toggler"
